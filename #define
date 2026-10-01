@@ -1,0 +1,21 @@
+#include <stdio.h>
+#define YES 1
+#define NO 0
+
+void CanEnter(int HasID , int IsRegistered){
+    if (HasID==1 && IsRegistered==1){
+        printf("You may enter \n");
+    }
+    else {
+        printf("You can not enter \n");
+    }
+}
+
+int main(void){
+    int HasID=YES;
+    int IsRegistered=NO;
+    
+    CanEnter(HasID,IsRegistered);
+
+    return 0;
+}
