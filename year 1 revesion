@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+int LargestNumber(int a , int b , int c){
+    int Max=-99999;
+    if (a>Max){
+        Max=a;
+    }
+    if (b>Max){
+        Max=b;
+    }
+    if (c>Max){
+        Max=c;
+    }
+    return Max;
+}
+
+int CountEven(int a , int b , int c){
+    int arr[3]={a,b,c};
+    int Count=0;
+    for(int i =0 ; i<3 ; i++){
+        if(arr[i]%2==0){
+            Count++;
+        }
+    }
+    return Count;
+}
+
+
+
+
+int main(void){
+    int Num1;
+    int Num2;
+    int Num3; /* initializing our 3 number */
+    
+    printf("Enter 3 Numbers: \n");
+    scanf("%d %d %d", &Num1 , &Num2 , &Num3);
+
+    int Largest = LargestNumber(Num1,Num2,Num3);
+    int EvenCount = CountEven(Num1,Num2,Num3);
+
+    printf("The largest number is: %d \n",Largest);
+    printf("the number of even numbers are: %d \n" ,EvenCount);
+
+
+    return 0;
+}
