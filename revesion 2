@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main(void){
+    
+const int size =10;
+int count_negative=0;
+int sum=0;
+int CountEven=0;
+int arr[size];
+    for(int i = 0 ; i<size ; i++){
+        printf("enter number %d",i);
+        scanf("%d",&arr[i]);
+        if(arr[i]>0){
+            sum = sum+arr[i];
+        }
+        else{
+            count_negative++;
+        }
+        if(arr[i]%2==0){
+            CountEven++;
+        }
+    }
+        printf("the sum of positive numbers are: %d ",sum);
+        printf("the number of negative numbers are: %d",count_negative);
+        printf("the number of even numbers are: %d",CountEven);
+    
+}
