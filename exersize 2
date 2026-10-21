@@ -1,0 +1,45 @@
+#define F_CPU 1000000UL
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main(void){
+	
+	
+	DDRD=0x00; // configure port D as all inputs
+	DDRA=0x00;
+	DDRB=0xFF; //configure all pins as outputs
+	DDRC=0xFF;
+	
+	while(1){
+	PORTD |= (1<<PD2); //intialize with high voltage
+	if(!(PIND & (1<<PD2))){ //check if SW1 is pressed
+		PORTB |= (1<<PB4); // turn on status led
+		
+		if(PINA & (1<<0)){ //check if button 2 is pressed
+			PORTC |= (1<<PC0); //turn on warning led
+		}
+		else{
+			PORTC &= ~(1<<PC0); //turn off
+		}
+	
+	//while system in still running:
+	while(!(PIND & (1<<PD2))){
+	PORTC |= (1<<PC1); //turn on red for 3 secounds
+	_delay_ms(3000);
+	PORTC &= ~(1<<PC1); //turn off
+	
+	PORTC |= (1<<PC2); //turn on yellow for 1 secounds
+	_delay_ms(1000);
+	PORTC ^= (1<<PC2); //turn off
+	
+	PORTC |= (1<<PC3); //turn on green for 3 secounds
+	_delay_ms(3000);
+	PORTC ^= (1<<PC3); //turn off
+	}
+	}
+	
+	else{
+		PORTB &= ~(1<<PB4); //status led turns off when system turns off
+	}
+	}
+}
