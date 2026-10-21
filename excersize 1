@@ -1,0 +1,41 @@
+#define F_CPU 1000000UL //define frequency of cpu
+#include <avr/io.h> // input output registers
+#include <util/delay.h> //delay library
+
+int main(void){
+	DDRA=0x00; // make all port a pins input
+	DDRB=0xFF; //make all port b pins output
+	
+	PORTB=0x00; // assign all led's initially low 
+	PORTA |= (1 << PA0); // make button 1 initialy with 1 (pull up)
+	
+	while(1){
+	
+	if(!(PINA &(1<<0))){ //check if button A (pull up) is pressed
+		PORTB |= (1<<PB3); //assign high voltage to PB3
+		_delay_ms(150);
+	}
+	else{
+		PORTB &= ~(1<<PB3); //if button not pressed then low 
+	}
+	
+	if(PINA & (1<<1)){ //check if button b (pull down) is pressed
+		PORTB |= (1<<7); //assign high voltage to PB7
+		_delay_ms(150);
+		
+	}
+	else{
+		PORTB &= ~(1<<7); //if button not pressed then low
+	}
+	
+	if(PINA & (1<<PA2)){ //check if button 3 (pull down) is pressed
+		PORTB |= (1<<PB3) | (1<<PB7); //assign high voltages to both PB3 AND PB7
+	}
+	else{
+		PORTB &= ~((1<<PB3) | (1<<PB7)); //if button not pressed to low voltage to both
+	}
+	
+
+	}
+}
+
